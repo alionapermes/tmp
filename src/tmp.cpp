@@ -1,29 +1,29 @@
 #include <iostream>
 #include <string>
-#include <boost/program_options.hpp>
+#include <array>
+#include <boost/asio.hpp>
 
-//#include "server.hpp"
-
-/* #define DEFAULT_CONFIG "tmp.cfg" */
-
-namespace opt = boost::program_options;
+using namespace boost::asio;
 
 
 int main(int argc, char** argv)
 {
-    /* std::string config_path = DEFAULT_CONFIG; */
-    /* std::string db_path; */
-    /* opt::variables_map vm; */
-    /* opt::options_description desc("Options"); */
+    using boost::asio::ip::tcp;
+    using boost::system::error_code;
 
-    /* desc.add_options()( */
-    /*     "config,c", */
-    /*     opt::value<std::string>(), */
-    /*     "Path to server config file" */
-    /* ); */
+    int port = atoi(argv[1]);
+    io_context context;
+    tcp::acceptor acceptor(context, tcp::endpoint(tcp::v4(), port));
 
-    /* opt::store(opt::parse_command_line(argc, argv, desc), vm); */
-    /* config_path = vm["config"].as<std::string>(); */
+    while (true) {
+        std::array<char, 128> buf;
+        tcp::socket socket(context);
+        acceptor.accept(socket);
+
+        error_code error;
+        size_t len = socket.read_some(buffer(buf), error);
+        std::cout << "buf: " << buf.data() << std::endl;
+    }
 
     return 0;
 }
