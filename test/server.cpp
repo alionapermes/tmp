@@ -26,6 +26,8 @@ int main(int argc, char** argv)
     }
 
     tcp::socket socket(context);
+
+    std::cout << "connecting to server..." << std::endl;
     socket.connect(ep, error);
     if (error) {
         std::cout << "error: " << error.what() << std::endl;
@@ -33,6 +35,7 @@ int main(int argc, char** argv)
     }
     /* connect(socket, endpoints); */
 
+    std::cout << "sending msg: " << msg << std::endl;
     write(socket, buffer(msg), error);
 
     if (error) {
