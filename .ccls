@@ -1,4 +1,0 @@
-g++
-%h c++-header
-%cpp -std=c++20
-
