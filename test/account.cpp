@@ -1,6 +1,8 @@
-#include <gtest/gtest.h>
-#include <tl/expected.hpp>
+// conan
+#include "gtest/gtest.h"
+#include "tl/expected.hpp"
 
+// local
 #include "test_data.hpp"
 #include "../src/storage.hpp"
 #include "../src/models.hpp"

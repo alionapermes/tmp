@@ -1,7 +1,9 @@
 #pragma once
 
-#include <sqlite_orm/sqlite_orm.h>
+// conan
+#include "sqlite_orm/sqlite_orm.h"
 
+// local
 #include "models.hpp"
 
 namespace orm = sqlite_orm;
