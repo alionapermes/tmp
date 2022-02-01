@@ -4,9 +4,9 @@
 
 // local
 #include "test_data.hpp"
-#include "../src/storage.hpp"
-#include "../src/models.hpp"
-#include "../src/account.hpp"
+#include "src/storage.hpp"
+#include "src/models.hpp"
+#include "src/account.hpp"
 
 
 TEST(login, account)
