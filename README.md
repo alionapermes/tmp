@@ -9,7 +9,7 @@ Temp repo for simple game server
 ```sh
 mkdir build
 cd build
-conan install ..
+conan install .. --build=http_parser
 cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DDEBUG=[1;0] -DTESTS=[1;0]
 make
 ```

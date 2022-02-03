@@ -4,29 +4,19 @@
 #include <array>
 
 // conan
-#include "boost/asio.hpp"
-
-using namespace boost::asio;
+#include "restinio/all.hpp"
 
 
 int main(int argc, char** argv)
 {
-    using boost::asio::ip::tcp;
-    using boost::system::error_code;
-
-    int port = atoi(argv[1]);
-    io_context context;
-    tcp::acceptor acceptor(context, tcp::endpoint(tcp::v4(), port));
-
-    while (true) {
-        std::array<char, 128> buf;
-        tcp::socket socket(context);
-        acceptor.accept(socket);
-
-        error_code error;
-        size_t len = socket.read_some(buffer(buf), error);
-        std::cout << "buf: " << buf.data() << std::endl;
-    }
+    restinio::run(
+        restinio::on_this_thread()
+        .port(80)
+        .address("0.0.0.0")
+        .request_handler([](auto req) {
+            return req->create_response().set_body("Hello, World!").done();
+        })
+    );
 
     return 0;
 }
